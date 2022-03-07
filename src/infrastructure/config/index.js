@@ -8,6 +8,9 @@ function loadConfig() {
     NODE_ENV: Joi.string().valid('development', 'production').required(),
     PORT: Joi.number().required(),
     DB_URI: Joi.string().uri().required(),
+    DB_USER: Joi.string().required(),
+    DB_PASS: Joi.string().required(),
+    DB_NAME: Joi.string().required()
   })
 
   const {error, value} = configSchema.validate(process.env, {allowUnknown: true})
