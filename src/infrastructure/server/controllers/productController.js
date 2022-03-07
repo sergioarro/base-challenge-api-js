@@ -15,9 +15,6 @@ const getProductById = async ctx => {
   try {
     const productId = ctx.params.id
     const product = await productById(productId)
-    /*if ( isPalindrome(productId) && product && product.length > 0){
-      
-    }*/
     ctx.status = 200
     ctx.body = product
   } catch (error) {
@@ -26,11 +23,11 @@ const getProductById = async ctx => {
   }
 }
 
-function isPalindrome(str) {
+const isPalindrome = async str => {
+  if (!str) return false
   const newStr = str.replace(/[\W_]/g, "").toLowerCase();
   const strReversed = newStr.split("").reverse().join("");
-
   return newStr === strReversed;
 }
 
-module.exports = { getProducts, getProductById }
+module.exports = { getProducts, getProductById, isPalindrome }

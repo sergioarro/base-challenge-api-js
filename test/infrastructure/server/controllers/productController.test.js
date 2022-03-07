@@ -1,5 +1,5 @@
 const { allProducts, productById } = require('@models/product')
-const { getProducts, getProductById } = require('@controllers/productController')
+const { getProducts, getProductById, isPalindrome } = require('@controllers/productController')
 
 jest.mock('@models/product', () => ({
   allProducts: jest.fn(),
@@ -62,5 +62,38 @@ describe('Product controller test', () => {
         body: "Error",
       })
     })
+
+    it('return empty params id string', async () => {
+        ctx = { params: { id: 'oso' } }
+        const productsMock = []
+        productById.mockReturnValueOnce(productsMock)
+  
+        await getProductById(ctx)
+  
+        expect(ctx.body.length).toEqual(0)
+    })
+
   })
+
+  describe('isPalindrome', () => {
+    beforeAll(() => {
+      str = 'oso'
+    })
+
+    it('return isPalondrome true', async () => {
+      expect(await isPalindrome(str)).toEqual(true)
+    })
+
+    it('return isPalondrome false', async () => {
+        str = 'paralelepipedo'
+        expect(await isPalindrome(str)).toEqual(false)
+    })
+
+    it('return isPalondrome false str is null', async () => {
+        str = null
+        expect(await isPalindrome(str)).toEqual(false)
+    })
+  })
+
+
 })
