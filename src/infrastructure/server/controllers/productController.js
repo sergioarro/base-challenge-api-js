@@ -27,12 +27,20 @@ const getProductByStr = async ctx => {
     try {
       const str = ctx.params.str
       const products = await productByStr(str)
+      if (await isPalindrome(str)) await setDiscountPalindrome(products)
       ctx.status = 200
       ctx.body = products
     } catch (error) {
       ctx.status = 500
       ctx.body = "Error"
     }
+  }
+
+  const setDiscountPalindrome = async products =>  {
+    if (!products || products.length === 0) return false   
+    products.forEach(product => {
+        product.price = product.price / 2;
+    });
   }
 
 const isPalindrome = async str => {
@@ -42,4 +50,4 @@ const isPalindrome = async str => {
   return newStr === strReversed;
 }
 
-module.exports = { getProducts, getProductById, isPalindrome, getProductByStr }
+module.exports = { getProducts, getProductById, isPalindrome, getProductByStr, setDiscountPalindrome }
