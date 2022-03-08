@@ -40,5 +40,3 @@ services:
       - db/:/data/db
     networks:
       walmart-net:
-volumes:
-  db:
