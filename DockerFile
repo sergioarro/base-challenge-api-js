@@ -2,11 +2,17 @@ FROM node:13.12.0-alpine
 
 WORKDIR /app
 
+ENV NODE_ENV=development
+
 ENV PATH /app/node_modules/.bin:$PATH
 
 COPY package*.json ./
+COPY .env ./
 RUN npm install
 
-COPY . ./
+COPY . .
 
-CMD ["npm", "run", "start"] 
+EXPOSE 3030
+EXPOSE 27017
+
+CMD ["npm", "run", "start"]

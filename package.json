@@ -6,6 +6,9 @@
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
+    "docker:build": "docker build -t walmart-api .",
+    "docker:run": "docker run --name  walmart-api -p 3030:3030 -d walmart-api -e PORT='3030' -e DB_URI='mongodb://localhost:27017' -e DB_USER=productListUser -e DB_PASS=productListPassword -e DB_NAME=promotions -e NODE_ENV=development",
+    "docker:run2": "npm run docker:build && docker run --name walmart-api -it --rm -v ${PWD}:/app -v /app/node_modules -p 3030:3030 -d walmart-api",
     "test": "jest --detectOpenHandles --runInBand --forceExit",
     "test:watch": "npm test -- --watchAll --runInBand",
     "coverage": "npm test -- --coverage --no-cache --detectOpenHandles",

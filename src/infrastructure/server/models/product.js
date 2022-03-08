@@ -1,7 +1,7 @@
 const productsModel = require('../schema/product-schema')
 
 const allProducts = async () => {
-  const products = await productsModel.find()
+  const products = await productsModel.find().limit(100)
   return products
 }
 
