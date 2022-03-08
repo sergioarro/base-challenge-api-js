@@ -1,4 +1,4 @@
-const { allProducts, productById } = require('../models/product')
+const { allProducts, productById, productByStr } = require('../models/product')
 
 const getProducts = async ctx => {
   try {
@@ -23,6 +23,18 @@ const getProductById = async ctx => {
   }
 }
 
+const getProductByStr = async ctx => {
+    try {
+      const str = ctx.params.str
+      const products = await productByStr(str)
+      ctx.status = 200
+      ctx.body = products
+    } catch (error) {
+      ctx.status = 500
+      ctx.body = "Error"
+    }
+  }
+
 const isPalindrome = async str => {
   if (!str) return false
   const newStr = str.replace(/[\W_]/g, "").toLowerCase();
@@ -30,4 +42,4 @@ const isPalindrome = async str => {
   return newStr === strReversed;
 }
 
-module.exports = { getProducts, getProductById, isPalindrome }
+module.exports = { getProducts, getProductById, isPalindrome, getProductByStr }

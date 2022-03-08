@@ -10,4 +10,16 @@ const productById = async productId => {
   return product
 }
 
-module.exports = { allProducts, productById }
+const productByStr = async str => {
+    const products = await productsModel.find(
+        { "$or": [{
+            "brand": {'$regex' : '.*' + str + '.*'}
+        }, 
+        {
+            "description": {'$regex' : '.*' + str + '.*'}
+        }] 
+    })
+    return products
+  }
+
+module.exports = { allProducts, productById, productByStr }

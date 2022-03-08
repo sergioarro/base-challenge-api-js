@@ -1,5 +1,5 @@
 const productSchema = require('@schema/product-schema')
-const { allProducts, productById } = require('@models/product')
+const { allProducts, productById, productByStr } = require('@models/product')
 
 jest.mock('@schema/product-schema', () => ({
   find: jest.fn(),
@@ -17,6 +17,13 @@ describe('Product model test', () => {
     const productMock = []
     productSchema.find.mockReturnValueOnce(productMock)
     const product = await productById()
+    expect(product).toEqual(productMock)
+  })
+
+  it('return the product returned by productByStr', async () => {
+    const productMock = []
+    productSchema.find.mockReturnValueOnce(productMock)
+    const product = await productByStr()
     expect(product).toEqual(productMock)
   })
 })
