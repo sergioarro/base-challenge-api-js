@@ -6,6 +6,7 @@ const getProducts = async ctx => {
     ctx.status = 200
     ctx.body = products
   } catch (error) {
+    console.error("error products: ", error)
     ctx.status = 500
     ctx.body = "Error"
   }
@@ -18,6 +19,7 @@ const getProductById = async ctx => {
     ctx.status = 200
     ctx.body = product
   } catch (error) {
+    console.error("error getProductById: ", error)
     ctx.status = 500
     ctx.body = "Error"
   }
@@ -31,6 +33,7 @@ const getProductByStr = async ctx => {
       ctx.status = 200
       ctx.body = products
     } catch (error) {
+      console.error("error getProductByStr: ", error)
       ctx.status = 500
       ctx.body = "Error"
     }
