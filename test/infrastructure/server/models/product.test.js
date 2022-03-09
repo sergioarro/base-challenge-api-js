@@ -2,8 +2,12 @@ const productSchema = require('@schema/product-schema')
 const { allProducts, productById, productByStr } = require('@models/product')
 
 jest.mock('@schema/product-schema', () => ({
-  find: jest.fn(),
+  find: jest.fn().mockImplementationOnce(() => ({
+    limit: jest.fn().mockImplementationOnce(() => ([])),}))
 }))
+
+allProducts.find = jest.fn().mockImplementation(() => ({ limit: 
+  jest.fn().mockResolvedValue([])})); 
 
 describe('Product model test', () => {
   it('return all products', async () => {
