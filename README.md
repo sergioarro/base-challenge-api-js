@@ -43,6 +43,15 @@ make database-up
 ```
    curl --request GET --url http://localhost:3030/productdiscount/adsda  
 ```
+8. Correr docker-compose levantando api y mongodb con carga de datos iniciales. Donde quedara todo funcionando pueden
+   Probar pegandole directo a la api curl --request GET --url http://localhost:3030/product/1
+```
+   npm run compose-up  
+```
+9. Bajar docker-compose
+```
+   npm run compose-down  
+```
 
 ## Pruebas 
 
