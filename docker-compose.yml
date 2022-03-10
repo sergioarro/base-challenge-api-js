@@ -1,22 +1,20 @@
 version: '3.7'
 
-networks:
-  walmart-net:
-
 services:
   walmart-api:
     build:
       context: ./
-      dockerfile: dockerfile
+      dockerfile: Dockerfile
     ports:
       - "3030:3030"
     container_name: walmart-api
     links:
       - mongo-db
-    env_file: .env
+    env_file: 
+      - .env
     environment:
       - PORT=3030
-      - DB_URI=mongodb://127.0.0.1:27017 
+      - DB_URI=mongodb://mongo-db:27017
       - DB_USER=productListUser 
       - DB_PASS=productListPassword 
       - DB_NAME=promotions 
@@ -28,15 +26,27 @@ services:
       walmart-net:
   mongo-db:
     image: mongo
+    restart: always
     ports:
       - "27017:27017"
     container_name: mongodb-local
-    env_file: .env
+    env_file: 
+      - .env
     environment:
       MONGO_INITDB_ROOT_USERNAME: productListUser
       MONGO_INITDB_ROOT_PASSWORD: productListPassword
       MONGO_INITDB_DATABASE: promotions
     volumes:
-      - db/:/data/db
+      - ./database:/database
     networks:
       walmart-net:
+
+networks:
+  walmart-net:
+    driver: bridge
+
+volumes:
+  database:
+
+
+  
