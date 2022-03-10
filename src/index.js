@@ -4,7 +4,12 @@ const {loadDBConnection} = require('./infrastructure/db')
 
 async function main() {
   const appConfig = loadConfig()
-  const dbModule = loadDBConnection({dbUri: appConfig.DB_URI})
+  const dbModule = loadDBConnection({
+    dbUri: appConfig.DB_URI,
+    dbUser: appConfig.DB_USER,
+    dbPass: appConfig.DB_PASS,
+    dbName: appConfig.DB_NAME
+  })
   const webServerModule = loadWebServer({port: appConfig.PORT})
 
   await dbModule.start()
